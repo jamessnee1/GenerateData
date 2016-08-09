@@ -12,8 +12,12 @@ public class Main {
 		
 		int numRows = 0;
 		int numColumns = 0;
+		String filename = "";
 		
 		Scanner s = new Scanner(System.in);
+		System.out.printf("Please enter filename: ");
+		filename = s.next();
+		filename = filename + ".csv";
 		System.out.printf("Please enter amount of rows to generate: ");
 		numRows = s.nextInt();
 		System.out.printf("Please enter amount of columns to generate: ");
@@ -29,7 +33,7 @@ public class Main {
 		}
 		
 		
-		File file = new File("data.csv");
+		File file = new File(filename);
 		
 		//if file exists, create new file regardless
 		if(file.exists()){
@@ -46,15 +50,16 @@ public class Main {
 			
 			for(String val : columnNames){
 				bw.write(val + i + ",");
+				
 			}
-			//bw.write(username + i + ",");
+			
 			bw.newLine();
 
 			
 		}
 		
 		bw.close();
-		System.out.println("File data.csv written!\n");
+		System.out.println("File " + filename + " written!\n");
 
 	}
 
