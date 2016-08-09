@@ -14,6 +14,9 @@ public class Main {
 		int numColumns = 0;
 		String filename = "";
 		
+		System.out.println("GenerateData utility for JMeter");
+		System.out.println("\tBy James Snee");
+		System.out.println("-------------------------------\n\n");
 		Scanner s = new Scanner(System.in);
 		System.out.printf("Please enter filename: ");
 		filename = s.next();
