@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -10,12 +11,23 @@ public class Main {
 		
 		
 		int numRows = 0;
+		int numColumns = 0;
 		
 		Scanner s = new Scanner(System.in);
 		System.out.printf("Please enter amount of rows to generate: ");
 		numRows = s.nextInt();
-		System.out.printf("Please enter a username to generate: ");
-		String username = s.next();
+		System.out.printf("Please enter amount of columns to generate: ");
+		numColumns = s.nextInt();
+		
+		//create arraylist of strings for column names
+		ArrayList<String> columnNames = new ArrayList<String>();
+		
+		for(int j = 1; j <= numColumns; j++){
+			System.out.printf("Please enter name for field " + j + ": ");
+			String input = s.next();
+			columnNames.add(input);
+		}
+		
 		
 		File file = new File("data.csv");
 		
@@ -29,12 +41,15 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(fw);
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(username);
-		
+		//add one to each and add to line
 		for(int i = 0; i < numRows; i++){
 			
-			bw.write(username + i + ",");
+			for(String val : columnNames){
+				bw.write(val + i + ",");
+			}
+			//bw.write(username + i + ",");
 			bw.newLine();
+
 			
 		}
 		
