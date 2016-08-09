@@ -33,10 +33,8 @@ public class Main {
 		
 		for(int i = 0; i < numRows; i++){
 			
-			//bw.write(sb.append(i + "\n").toString());
-			bw.write(sb.append(i + ",").toString());
+			bw.write(username + i + ",");
 			bw.newLine();
-			sb.setLength(sb.length() - 2);
 			
 		}
 		
