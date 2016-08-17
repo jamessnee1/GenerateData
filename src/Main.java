@@ -16,11 +16,14 @@ public class Main {
 		int numColumns = 0;
 		String filename = "";
 		
+		System.out.println("\n");
+		
+		
 		System.out.println("GenerateData utility for JMeter");
 		System.out.println("\tBy James Snee");
 		System.out.println("-------------------------------\n\n");
 		s  = new Scanner(System.in);
-		System.out.printf("Please enter filename: ");
+		System.out.printf("Please enter filename (without extension): ");
 		filename = s.next();
 		filename = filename + ".csv";
 		System.out.printf("Please enter amount of rows to generate: ");
