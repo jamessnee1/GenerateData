@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 
+	static Scanner s;
+
 	public static void main(String[] args) throws IOException {
 		
 		
@@ -17,7 +19,7 @@ public class Main {
 		System.out.println("GenerateData utility for JMeter");
 		System.out.println("\tBy James Snee");
 		System.out.println("-------------------------------\n\n");
-		Scanner s = new Scanner(System.in);
+		s  = new Scanner(System.in);
 		System.out.printf("Please enter filename: ");
 		filename = s.next();
 		filename = filename + ".csv";
@@ -28,11 +30,27 @@ public class Main {
 		
 		//create arraylist of strings for column names
 		ArrayList<String> columnNames = new ArrayList<String>();
+		//create int array if we need to iterate field
+		int[] flags = new int[numColumns];
 		
-		for(int j = 1; j <= numColumns; j++){
-			System.out.printf("Please enter name for field " + j + ": ");
+		
+		for(int j = 0; j < numColumns; j++){
+			System.out.printf("Please enter name for field " + (j+1) + ": ");
 			String input = s.next();
 			columnNames.add(input);
+			System.out.printf("Would you like to iterate this field Y/N? ");
+			String iterOption = s.next();
+			//check input for iteration
+			if(iterOption.equals("Y") || iterOption.equals("y")){
+				flags[j] = 1;
+			}
+			else if(iterOption.equals("N") || iterOption.equals("n")){
+				flags[j] = 0;
+			}
+			else {
+				System.out.println("Error: input is not valid, defaulting to iteration...");
+				flags[j] = 1;
+			}
 		}
 		
 		
@@ -47,12 +65,25 @@ public class Main {
 		FileWriter fw = new FileWriter(file);
 		BufferedWriter bw = new BufferedWriter(fw);
 		
-		StringBuilder sb = new StringBuilder();
+		
+		
 		//add one to each and add to line
 		for(int i = 0; i < numRows; i++){
 			
+			int count = 0;
+			
 			for(String val : columnNames){
-				bw.write(val + i + ",");
+				
+				//if we have set this column to iterate, append number to end
+				if(flags[count] == 1){
+					bw.write(val + i + ",");
+					count++;
+				}
+				else {
+					bw.write(val + ",");
+					count++;
+				}
+				
 				
 			}
 			
